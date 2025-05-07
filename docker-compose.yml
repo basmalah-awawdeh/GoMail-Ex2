@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  server:
+    build: .
+    container_name: gomail-main-server-1
+    stdin_open: true
+    tty: true
+    networks:
+      - gomail-network
+    volumes:
+      - ./data:/usr/src/gomail/data
+    working_dir: /usr/src/gomail/build
+    entrypoint: /bin/bash   
+
+  client:
+    build: .
+    container_name: gomail-main-client-1
+    stdin_open: true
+    tty: true
+    networks:
+      - gomail-network
+    working_dir: /usr/src/gomail/src/client
+    entrypoint: /bin/bash  
+
+networks:
+  gomail-network:
+    driver: bridge
