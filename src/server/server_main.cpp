@@ -27,8 +27,8 @@ while (true) {
     // reding the client`s input data
     ssize_t bytesRead = read(clientSocket, buffer, BUFFER_SIZE-1);
     if (bytesRead <=0){
-        break
-    };
+        break;
+    }
     std::string request(buffer);
     //check the client's request
     std::string response = requestCheck(request, blacklist, manager, bloomFileManager);
@@ -38,7 +38,7 @@ close(clientSocket);
 }
 
 int main(int argc, char* argv[]) {
-    int port, bloomFilter_size, id, server_fd;
+    int port, bloomFilter_size, id, server_fd, clientSocket;
     //chcking if our args are correct
     if (!validateArgs(argc, argv)) {
         return 1; 
