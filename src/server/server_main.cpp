@@ -60,10 +60,6 @@ int main(int argc, char* argv[]) {
     if (hashFunctions.empty()) {
         return 1;
     }
-
-    std::cout << "Starting server with bloom size: " << bloomFilter_size
-              << " and " << hashFunctions.size() << " hash functions.\n";
-
     auto filter = std::make_shared<BloomFilter>(bloomFilter_size, hashFunctions);
     BlacklistURL blacklist(filter);
     manager.load(blacklist);
@@ -89,8 +85,6 @@ int main(int argc, char* argv[]) {
     if (listen(server_fd, 1) < 0) {
         return 1;
     }
-    //confirming that the server is listening
-    std::cout << "Server listening on port " << port << "\n";
     //our loop to accept a client
     while (true) {
         clientSocket = accept(server_fd, nullptr, nullptr);
